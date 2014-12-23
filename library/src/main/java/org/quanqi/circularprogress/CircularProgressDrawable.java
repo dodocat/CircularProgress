@@ -26,11 +26,12 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
 
     private static final Interpolator SWEEP_INTERPOLATOR = new DecelerateInterpolator();
 
-    private static final int ANGLE_ANIMATOR_DURATION = 2000;
+    private int angleAnimatorDuration = 2000;
 
-    private static final int SWEEP_ANIMATOR_DURATION = 600;
+    private int sweepAnimatorDuration = 600;
 
-    private static final int MIN_SWEEP_ANGLE = 30;
+    private int minSweepAngle = 30;
+
     private final RectF fBounds = new RectF();
 
     private ObjectAnimator mObjectAnimatorSweep;
@@ -67,10 +68,10 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
         float startAngle = mCurrentGlobalAngle - mCurrentGlobalAngleOffset;
         float sweepAngle = mCurrentSweepAngle;
         if (mModeAppearing) {
-            sweepAngle += MIN_SWEEP_ANGLE;
+            sweepAngle += minSweepAngle;
         } else {
             startAngle = startAngle + sweepAngle;
-            sweepAngle = 360 - sweepAngle - MIN_SWEEP_ANGLE;
+            sweepAngle = 360 - sweepAngle - minSweepAngle;
         }
         canvas.drawArc(fBounds, startAngle, sweepAngle, false, mPaint);
     }
@@ -93,7 +94,7 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
     private void toggleAppearingMode() {
         mModeAppearing = !mModeAppearing;
         if (mModeAppearing) {
-            mCurrentGlobalAngleOffset = (mCurrentGlobalAngleOffset + MIN_SWEEP_ANGLE * 2) % 360;
+            mCurrentGlobalAngleOffset = (mCurrentGlobalAngleOffset + minSweepAngle * 2) % 360;
         }
     }
 
@@ -136,14 +137,14 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
     private void setupAnimations() {
         mObjectAnimatorAngle = ObjectAnimator.ofFloat(this, mAngleProperty, 360f);
         mObjectAnimatorAngle.setInterpolator(ANGLE_INTERPOLATOR);
-        mObjectAnimatorAngle.setDuration(ANGLE_ANIMATOR_DURATION);
+        mObjectAnimatorAngle.setDuration(angleAnimatorDuration);
         mObjectAnimatorAngle.setRepeatMode(ValueAnimator.RESTART);
         mObjectAnimatorAngle.setRepeatCount(ValueAnimator.INFINITE);
 
         mObjectAnimatorSweep = ObjectAnimator.ofFloat(this,
-                mSweepProperty, 360f - MIN_SWEEP_ANGLE * 2);
+                mSweepProperty, 360f - minSweepAngle * 2);
         mObjectAnimatorSweep.setInterpolator(SWEEP_INTERPOLATOR);
-        mObjectAnimatorSweep.setDuration(SWEEP_ANIMATOR_DURATION);
+        mObjectAnimatorSweep.setDuration(sweepAnimatorDuration);
         mObjectAnimatorSweep.setRepeatMode(ValueAnimator.RESTART);
         mObjectAnimatorSweep.setRepeatCount(ValueAnimator.INFINITE);
         mObjectAnimatorSweep.addListener(new Animator.AnimatorListener() {
@@ -214,4 +215,37 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
         return mCurrentSweepAngle;
     }
 
+    public static final class Builder {
+
+        private CircularProgressDrawable drawable;
+        private int angleAnimatorDuration = 2000;
+        private int sweepAnimatorDuration = 600;
+        private int minSweepAngle = 30;
+        private int borderWidth = 4;
+        private int color = 0x00ff00;
+
+        public CircularProgressDrawable build() {
+            CircularProgressDrawable drawable = new CircularProgressDrawable(color, borderWidth);
+            drawable.angleAnimatorDuration = angleAnimatorDuration;
+            drawable.sweepAnimatorDuration = sweepAnimatorDuration;
+            drawable.minSweepAngle = minSweepAngle;
+            return drawable;
+        }
+
+        public void angleAnimatorDuration(int millis) {
+            this.angleAnimatorDuration = millis;
+        }
+
+        public void sweepAnimatorDuration(int millis) {
+            this.sweepAnimatorDuration = millis;
+        }
+
+        public void borderWidth(int px) {
+            this.borderWidth = px;
+        }
+
+        public void color(int color) {
+            this.color = color;
+        }
+    }
 }
