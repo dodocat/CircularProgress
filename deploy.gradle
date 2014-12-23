@@ -64,16 +64,16 @@ afterEvaluate { project ->
                     url = POM_URL
 
                     scm {
-                        url = hasProperty('POM_SCM_URL') ? POM_SCM_URL : ""
-                        connection = hasProperty('POM_SCM_CONNECTION') ? POM_SCM_CONNECTION : ""
-                        developerConnection = hasProperty('POM_SCM_DEV_CONNECTION') ? POM_SCM_DEV_CONNECTION : ""
+                        url = project.hasProperty('POM_SCM_URL') ? POM_SCM_URL : ""
+                        connection = project.hasProperty('POM_SCM_CONNECTION') ? POM_SCM_CONNECTION : ""
+                        developerConnection = project.hasProperty('POM_SCM_DEV_CONNECTION') ? POM_SCM_DEV_CONNECTION : ""
                     }
 
                     licenses {
                         license {
-                            name = hasProperty('POM_LICENCE_NAME') ? POM_LICENCE_NAME : ""
-                            url = hasProperty('POM_LICENCE_URL') ? POM_LICENCE_URL : ""
-                            distribution = hasProperty('POM_LICENCE_DIST') ? POM_LICENCE_DIST : ""
+                            name = POM_LICENCE_NAME
+                            url = POM_LICENCE_URL
+                            distribution = POM_LICENCE_DIST
                         }
                     }
 
