@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="demo_color_sequence">
+        <item>#ff0000</item>
+        <item>#00ff00</item>
+        <item>#0000ff</item>
+    </array>
+</resources>
