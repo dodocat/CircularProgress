@@ -6,7 +6,7 @@
 In build.gradle config dependency.
 
 ``` groovy
-compile 'org.quanqi:CircularProgress:1.0.0'
+compile 'org.quanqi:CircularProgress:1.0.2'
 ```
 
 In laout xml
