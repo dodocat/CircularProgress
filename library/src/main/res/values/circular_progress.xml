@@ -22,9 +22,9 @@
     <integer name="circular_default_angleAnimationDurationMillis">2000</integer>
     <integer name="circular_default_miniSweepAngle">30</integer>
 
-    <color name="circular_red">#FFC93437</color>
-    <color name="circular_blue">#FF375BF1</color>
-    <color name="circular_yellow">#FFF7D23E</color>
-    <color name="circular_green">#FF34A350</color>
+    <color name="circular_red">#F90101</color>
+    <color name="circular_blue">#0266C8</color>
+    <color name="circular_yellow">#F2B50F</color>
+    <color name="circular_green">#00933B</color>
 
 </resources>
