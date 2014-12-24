@@ -1,7 +1,7 @@
 # A circular progressbar with sweeping angle
 ![demo](shots/demo.gif)
 
-## usage
+## Usage
 
 In build.gradle config dependency.
 
