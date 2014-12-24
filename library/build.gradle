@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply from: file('../deploy.gradle')
+
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.1"
@@ -23,19 +24,3 @@ android {
 dependencies {
     compile 'com.android.support:support-annotations:21.0.3'
 }
-
-task test << {
-
-    if (project.hasProperty("POM_LICENCE_NAME")) {
-        println "project has pom"
-    } else {
-        println "project has no pom"
-    }
-
-    if (hasProperty("POM_LICENCE_NAME")) {
-        println "has pom"
-    } else {
-        println "has no pom"
-    }
-}
-
